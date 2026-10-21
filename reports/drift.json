@@ -1,0 +1,313 @@
+{
+  "holdout": {
+    "alerts": [],
+    "mean_score": 0.2232,
+    "flag_rate": 0.5392,
+    "features": [
+      {
+        "feature": "pay_1",
+        "psi": 0.0052,
+        "ks": 0.0101,
+        "status": "ok"
+      },
+      {
+        "feature": "age",
+        "psi": 0.0035,
+        "ks": 0.0243,
+        "status": "ok"
+      },
+      {
+        "feature": "score",
+        "psi": 0.0024,
+        "ks": 0.0084,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt1",
+        "psi": 0.0024,
+        "ks": 0.0088,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_6",
+        "psi": 0.0023,
+        "ks": 0.0038,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt4",
+        "psi": 0.0023,
+        "ks": 0.0109,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt1",
+        "psi": 0.0019,
+        "ks": 0.0099,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt5",
+        "psi": 0.0017,
+        "ks": 0.0096,
+        "status": "ok"
+      },
+      {
+        "feature": "limit_bal",
+        "psi": 0.0015,
+        "ks": 0.0101,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_2",
+        "psi": 0.0015,
+        "ks": 0.0034,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_5",
+        "psi": 0.0014,
+        "ks": 0.0039,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_4",
+        "psi": 0.0012,
+        "ks": 0.0033,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt3",
+        "psi": 0.0012,
+        "ks": 0.0089,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt2",
+        "psi": 0.0011,
+        "ks": 0.0096,
+        "status": "ok"
+      },
+      {
+        "feature": "education",
+        "psi": 0.0011,
+        "ks": 0.0046,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt3",
+        "psi": 0.001,
+        "ks": 0.0088,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt2",
+        "psi": 0.001,
+        "ks": 0.0084,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt4",
+        "psi": 0.0009,
+        "ks": 0.0078,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt6",
+        "psi": 0.0007,
+        "ks": 0.0124,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt6",
+        "psi": 0.0007,
+        "ks": 0.0103,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt5",
+        "psi": 0.0006,
+        "ks": 0.0092,
+        "status": "ok"
+      },
+      {
+        "feature": "marriage",
+        "psi": 0.0006,
+        "ks": 0.0086,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_3",
+        "psi": 0.0003,
+        "ks": 0.0024,
+        "status": "ok"
+      },
+      {
+        "feature": "sex",
+        "psi": 0.0001,
+        "ks": 0.0058,
+        "status": "ok"
+      }
+    ]
+  },
+  "downturn": {
+    "alerts": [
+      "pay_4",
+      "pay_3",
+      "pay_2",
+      "limit_bal",
+      "pay_5",
+      "pay_6",
+      "score",
+      "pay_1"
+    ],
+    "mean_score": 0.2735,
+    "flag_rate": 0.7278,
+    "features": [
+      {
+        "feature": "pay_4",
+        "psi": 1.7612,
+        "ks": 0.1952,
+        "status": "alert"
+      },
+      {
+        "feature": "pay_3",
+        "psi": 1.5274,
+        "ks": 0.1861,
+        "status": "alert"
+      },
+      {
+        "feature": "pay_2",
+        "psi": 1.1554,
+        "ks": 0.1901,
+        "status": "alert"
+      },
+      {
+        "feature": "limit_bal",
+        "psi": 0.5231,
+        "ks": 0.1896,
+        "status": "alert"
+      },
+      {
+        "feature": "pay_5",
+        "psi": 0.3067,
+        "ks": 0.2023,
+        "status": "alert"
+      },
+      {
+        "feature": "pay_6",
+        "psi": 0.2769,
+        "ks": 0.1916,
+        "status": "alert"
+      },
+      {
+        "feature": "score",
+        "psi": 0.191,
+        "ks": 0.195,
+        "status": "alert"
+      },
+      {
+        "feature": "pay_1",
+        "psi": 0.1714,
+        "ks": 0.1704,
+        "status": "alert"
+      },
+      {
+        "feature": "bill_amt1",
+        "psi": 0.0513,
+        "ks": 0.0921,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt2",
+        "psi": 0.0446,
+        "ks": 0.0869,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt3",
+        "psi": 0.0359,
+        "ks": 0.0819,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt6",
+        "psi": 0.0333,
+        "ks": 0.0858,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt4",
+        "psi": 0.0324,
+        "ks": 0.0819,
+        "status": "ok"
+      },
+      {
+        "feature": "bill_amt5",
+        "psi": 0.0265,
+        "ks": 0.0868,
+        "status": "ok"
+      },
+      {
+        "feature": "age",
+        "psi": 0.0035,
+        "ks": 0.0243,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt1",
+        "psi": 0.0019,
+        "ks": 0.0099,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt5",
+        "psi": 0.0017,
+        "ks": 0.0096,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt3",
+        "psi": 0.0012,
+        "ks": 0.0089,
+        "status": "ok"
+      },
+      {
+        "feature": "education",
+        "psi": 0.0011,
+        "ks": 0.0046,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt2",
+        "psi": 0.0011,
+        "ks": 0.0096,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt4",
+        "psi": 0.0009,
+        "ks": 0.0078,
+        "status": "ok"
+      },
+      {
+        "feature": "pay_amt6",
+        "psi": 0.0007,
+        "ks": 0.0103,
+        "status": "ok"
+      },
+      {
+        "feature": "marriage",
+        "psi": 0.0006,
+        "ks": 0.0086,
+        "status": "ok"
+      },
+      {
+        "feature": "sex",
+        "psi": 0.0001,
+        "ks": 0.0058,
+        "status": "ok"
+      }
+    ]
+  }
+}
