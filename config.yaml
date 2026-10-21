@@ -1,0 +1,29 @@
+seed: 42
+
+data:
+  url: https://archive.ics.uci.edu/static/public/350/default+of+credit+card+clients.zip
+  sha256: 56c885f84457f6680f8438f02bfcdac9579323d8a94465ee5f26e32baa727602
+  cache: data/raw/uci350.zip
+  splits: {train: 0.6, calib: 0.2, test: 0.2}
+
+model:
+  learning_rate: 0.05
+  max_iter: 500
+  max_leaf_nodes: 31
+  min_samples_leaf: 50
+  l2_regularization: 1.0
+  early_stopping: true
+  validation_fraction: 0.1
+  calibration: sigmoid
+
+# Business cost of each error, in units of one wrongly declined good customer.
+cost:
+  false_negative: 5.0
+  false_positive: 1.0
+
+drift:
+  psi_warn: 0.1
+  psi_alert: 0.2
+  ks_alert: 0.1
+
+registry: models
