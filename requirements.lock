@@ -30,6 +30,7 @@ scipy==1.18.1
 six==1.17.0
 starlette==1.9.0
 threadpoolctl==3.7.0
+trainleak @ https://github.com/nancypatel12/trainleak/archive/c9e237fe167c77d2437142aea87eb6a0ad0ef9b7.tar.gz
 typing-inspection==0.4.4
 typing_extensions==4.16.0
 uvicorn==0.54.0

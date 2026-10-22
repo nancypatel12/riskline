@@ -1,0 +1,126 @@
+{
+  "v1": {
+    "model": "CalibratedClassifierCV",
+    "risk": "moderate",
+    "strongest_attack": "lira",
+    "train_accuracy": 0.8265,
+    "test_accuracy": 0.8145,
+    "generalization_gap": 0.012,
+    "n_members": 2000,
+    "n_nonmembers": 2000,
+    "attacks": {
+      "loss": {
+        "auc": 0.5196,
+        "advantage": 0.043,
+        "accuracy": 0.5215,
+        "tpr_at_fpr": {
+          "0.001": 0.0005,
+          "0.01": 0.0065,
+          "0.1": 0.111
+        }
+      },
+      "confidence": {
+        "auc": 0.5196,
+        "advantage": 0.043,
+        "accuracy": 0.5215,
+        "tpr_at_fpr": {
+          "0.001": 0.0005,
+          "0.01": 0.0065,
+          "0.1": 0.111
+        }
+      },
+      "entropy": {
+        "auc": 0.5089,
+        "advantage": 0.027,
+        "accuracy": 0.5135,
+        "tpr_at_fpr": {
+          "0.001": 0.0005,
+          "0.01": 0.006,
+          "0.1": 0.108
+        }
+      },
+      "modified_entropy": {
+        "auc": 0.5196,
+        "advantage": 0.043,
+        "accuracy": 0.5215,
+        "tpr_at_fpr": {
+          "0.001": 0.0005,
+          "0.01": 0.0065,
+          "0.1": 0.111
+        }
+      },
+      "lira": {
+        "auc": 0.5603,
+        "advantage": 0.087,
+        "accuracy": 0.5435,
+        "tpr_at_fpr": {
+          "0.001": 0.0035,
+          "0.01": 0.023,
+          "0.1": 0.166
+        }
+      }
+    }
+  },
+  "overfit_control": {
+    "model": "Pipeline",
+    "risk": "severe",
+    "strongest_attack": "lira",
+    "train_accuracy": 1.0,
+    "test_accuracy": 0.8095,
+    "generalization_gap": 0.1905,
+    "n_members": 2000,
+    "n_nonmembers": 2000,
+    "attacks": {
+      "loss": {
+        "auc": 0.79,
+        "advantage": 0.524,
+        "accuracy": 0.762,
+        "tpr_at_fpr": {
+          "0.001": 0.0015,
+          "0.01": 0.016,
+          "0.1": 0.189
+        }
+      },
+      "confidence": {
+        "auc": 0.79,
+        "advantage": 0.524,
+        "accuracy": 0.762,
+        "tpr_at_fpr": {
+          "0.001": 0.0015,
+          "0.01": 0.016,
+          "0.1": 0.189
+        }
+      },
+      "entropy": {
+        "auc": 0.7657,
+        "advantage": 0.476,
+        "accuracy": 0.738,
+        "tpr_at_fpr": {
+          "0.001": 0.0015,
+          "0.01": 0.0145,
+          "0.1": 0.1685
+        }
+      },
+      "modified_entropy": {
+        "auc": 0.79,
+        "advantage": 0.524,
+        "accuracy": 0.762,
+        "tpr_at_fpr": {
+          "0.001": 0.0015,
+          "0.01": 0.016,
+          "0.1": 0.189
+        }
+      },
+      "lira": {
+        "auc": 0.866,
+        "advantage": 0.605,
+        "accuracy": 0.8025,
+        "tpr_at_fpr": {
+          "0.001": 0.0455,
+          "0.01": 0.0775,
+          "0.1": 0.468
+        }
+      }
+    }
+  }
+}

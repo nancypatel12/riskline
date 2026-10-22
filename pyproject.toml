@@ -26,6 +26,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["httpx>=0.27", "pytest>=8", "ruff>=0.6"]
+privacy = ["trainleak @ https://github.com/nancypatel12/trainleak/archive/c9e237fe167c77d2437142aea87eb6a0ad0ef9b7.tar.gz"]
 
 [project.urls]
 Repository = "https://github.com/nancypatel12/riskline"

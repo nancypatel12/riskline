@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install train serve test lint drift bench docker clean
+.PHONY: install train serve test lint drift bench privacy docker clean
 
 install:
 	python3 -m venv .venv
@@ -25,6 +25,9 @@ drift:
 
 bench:
 	$(PY) scripts/benchmark.py
+
+privacy:
+	$(PY) scripts/privacy_audit.py
 
 docker:
 	docker build -t riskline .
