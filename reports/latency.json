@@ -1,16 +1,16 @@
 {
   "predict": {
     "n": 2000,
-    "p50_ms": 6.12,
-    "p95_ms": 7.82,
-    "p99_ms": 8.91
+    "p50_ms": 5.6,
+    "p95_ms": 7.18,
+    "p99_ms": 8.93
   },
   "batch_100": {
     "n": 200,
-    "p50_ms": 8.23,
-    "p95_ms": 9.2,
-    "p99_ms": 10.79,
-    "rows_per_s": 12158
+    "p50_ms": 6.9,
+    "p95_ms": 7.8,
+    "p99_ms": 9.15,
+    "rows_per_s": 14500
   },
   "setup": "1 uvicorn worker, sequential keep-alive client, same host"
 }

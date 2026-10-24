@@ -1,0 +1,106 @@
+{
+  "version": "v1",
+  "threshold": 0.16,
+  "n": 6000,
+  "attributes": {
+    "sex": {
+      "groups": {
+        "female": {
+          "n": 3598,
+          "default_rate": 0.21289605336297943,
+          "mean_score": 0.21904599296482272,
+          "flag_rate": 0.4480266814897165,
+          "wrongly_flagged": 0.3679378531073446,
+          "defaults_caught": 0.7441253263707572
+        },
+        "male": {
+          "n": 2402,
+          "default_rate": 0.23355537052456288,
+          "mean_score": 0.228870339429664,
+          "flag_rate": 0.4708576186511241,
+          "wrongly_flagged": 0.38511678435632807,
+          "defaults_caught": 0.7522281639928698
+        }
+      },
+      "gaps": {
+        "flag_rate": 0.02283093716140755,
+        "wrongly_flagged": 0.017178931248983453,
+        "defaults_caught": 0.008102837622112613
+      }
+    },
+    "age": {
+      "groups": {
+        "18-29": {
+          "n": 1912,
+          "default_rate": 0.223326359832636,
+          "mean_score": 0.23902573802595084,
+          "flag_rate": 0.4932008368200837,
+          "wrongly_flagged": 0.41414141414141414,
+          "defaults_caught": 0.7681498829039812
+        },
+        "30-39": {
+          "n": 2198,
+          "default_rate": 0.20609645131938126,
+          "mean_score": 0.20813620870627658,
+          "flag_rate": 0.42720655141037306,
+          "wrongly_flagged": 0.3472779369627507,
+          "defaults_caught": 0.7350993377483444
+        },
+        "40-49": {
+          "n": 1341,
+          "default_rate": 0.232662192393736,
+          "mean_score": 0.21931148067692344,
+          "flag_rate": 0.4436987322893363,
+          "wrongly_flagged": 0.3556851311953353,
+          "defaults_caught": 0.7339743589743589
+        },
+        "50+": {
+          "n": 549,
+          "default_rate": 0.2459016393442623,
+          "mean_score": 0.235476766061415,
+          "flag_rate": 0.48451730418943534,
+          "wrongly_flagged": 0.3961352657004831,
+          "defaults_caught": 0.7555555555555555
+        }
+      },
+      "gaps": {
+        "flag_rate": 0.06599428540971064,
+        "wrongly_flagged": 0.06686347717866342,
+        "defaults_caught": 0.03417552392962231
+      }
+    },
+    "marriage": {
+      "groups": {
+        "married": {
+          "n": 2767,
+          "default_rate": 0.24141669678352007,
+          "mean_score": 0.22228739322201896,
+          "flag_rate": 0.4506685941452837,
+          "wrongly_flagged": 0.3568365888518342,
+          "defaults_caught": 0.7455089820359282
+        },
+        "other": {
+          "n": 75,
+          "default_rate": 0.16,
+          "mean_score": 0.21868702523314687,
+          "flag_rate": 0.5066666666666667,
+          "wrongly_flagged": 0.4603174603174603,
+          "defaults_caught": 0.75
+        },
+        "single": {
+          "n": 3158,
+          "default_rate": 0.20487650411652944,
+          "mean_score": 0.22368692022155565,
+          "flag_rate": 0.4616846105129829,
+          "wrongly_flagged": 0.38749502190362406,
+          "defaults_caught": 0.749613601236476
+        }
+      },
+      "gaps": {
+        "flag_rate": 0.055998072521383,
+        "wrongly_flagged": 0.10348087146562607,
+        "defaults_caught": 0.004491017964071808
+      }
+    }
+  }
+}

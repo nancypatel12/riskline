@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "riskline"
 version = "0.1.0"
-description = "Credit default risk, end to end: reproducible training, calibrated scores, cost-optimal decisions, FastAPI serving, drift monitoring."
+description = "Credit default risk, end to end: calibrated scores, cost-optimal decisions, FastAPI serving, drift monitoring, a privacy audit and a fairness audit."
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "Nancy Patel" }]
