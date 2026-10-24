@@ -38,15 +38,14 @@ jobs:
           docker run -d --name api -p 8000:8000 riskline
           for i in $(seq 30); do curl -sf localhost:8000/health && break; sleep 1; done
           curl -sf localhost:8000/health | grep -q '"status":"ok"'
-          applicant='"limit_bal": 50000, "education": 2,
+          curl -sf -X POST localhost:8000/predict -H 'content-type: application/json' -d '{
+            "limit_bal": 50000, "sex": 2, "education": 2, "marriage": 1, "age": 35,
             "pay_1": 2, "pay_2": 2, "pay_3": 0, "pay_4": 0, "pay_5": 0, "pay_6": 0,
             "bill_amt1": 48000, "bill_amt2": 47000, "bill_amt3": 45000,
             "bill_amt4": 30000, "bill_amt5": 25000, "bill_amt6": 20000,
             "pay_amt1": 0, "pay_amt2": 1500, "pay_amt3": 1500,
-            "pay_amt4": 1000, "pay_amt5": 1000, "pay_amt6": 1000'
-          curl -sf -X POST localhost:8000/predict -H 'content-type: application/json' -d "{$applicant}" | tee /dev/stderr | grep -q probability
-          # Protected attributes are rejected, not ignored.
-          status=$(curl -s -o /dev/null -w '%{http_code}' -X POST localhost:8000/predict -H 'content-type: application/json' -d "{$applicant, \"sex\": 2}")
+            "pay_amt4": 1000, "pay_amt5": 1000, "pay_amt6": 1000}' | tee /dev/stderr | grep -q probability
+          status=$(curl -s -o /dev/null -w '%{http_code}' -X POST localhost:8000/predict -H 'content-type: application/json' -d '{"age": 12}')
           test "$status" = 422
       - if: always()
         run: docker logs api || true

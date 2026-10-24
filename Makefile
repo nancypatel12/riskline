@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install train serve test lint drift bench privacy sweep docker clean
+.PHONY: install train serve test lint drift bench privacy sweep fairness docker clean
 
 install:
 	python3 -m venv .venv
@@ -31,6 +31,9 @@ privacy:
 
 sweep:
 	$(PY) scripts/leakage_sweep.py
+
+fairness:
+	$(PY) scripts/fairness_audit.py
 
 docker:
 	docker build -t riskline .
