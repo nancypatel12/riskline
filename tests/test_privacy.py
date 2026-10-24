@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from riskline.privacy import Framed, audit, frame
+from riskline.privacy import Framed, audit, frame, sweep
 from riskline.schema import FEATURES, INTEGER, TARGET
 from riskline.train import build
 from tests.conftest import synthetic
@@ -33,3 +33,11 @@ def test_audit_separates_overfit_from_regularized(cfg):
         return audit(fitted, build(params, 0), members, nonmembers, TARGET, seed=0, **FAST).strongest.auc
 
     assert strongest_auc(OVERFIT) > strongest_auc(cfg["model"]) + 0.1
+
+
+def test_sweep_leaks_more_with_more_rounds():
+    members, nonmembers = synthetic(600, seed=1), synthetic(600, seed=2)
+    rows = sweep(OVERFIT, (10, 200), members, nonmembers, TARGET, seed=0, **FAST)
+    assert [r["rounds"] for r in rows] == [10, 200]
+    assert rows[1]["attack_auc"] > rows[0]["attack_auc"]
+    assert all(0 <= r["test_roc_auc"] <= 1 for r in rows)

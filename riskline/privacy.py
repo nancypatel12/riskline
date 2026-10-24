@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.base import BaseEstimator, ClassifierMixin, clone
+from sklearn.metrics import roc_auc_score
 
 from riskline.schema import FEATURES, INTEGER
 
@@ -46,3 +47,29 @@ def audit(model, recipe, members: pd.DataFrame, nonmembers: pd.DataFrame, target
         seed=seed,
         **kwargs,
     )
+
+
+def sweep(params: dict, rounds, members: pd.DataFrame, nonmembers: pd.DataFrame, target: str, seed: int, **kwargs):
+    """Audit one model per training length. Early stopping is off, so every model trains exactly `n` rounds."""
+    from riskline.train import build
+
+    rows = []
+    for n in rounds:
+        recipe = build({**params, "max_iter": n, "early_stopping": False}, seed)
+        fitted = clone(recipe).fit(members[FEATURES], members[target])
+        report = audit(fitted, recipe, members, nonmembers, target, seed, **kwargs)
+        s = report.strongest
+        scores = fitted.predict_proba(nonmembers[FEATURES])[:, 1]
+        rows.append(
+            {
+                "rounds": n,
+                "test_roc_auc": float(roc_auc_score(nonmembers[target], scores)),
+                "train_accuracy": report.train_accuracy,
+                "test_accuracy": report.test_accuracy,
+                "strongest_attack": s.name,
+                "attack_auc": s.auc,
+                "tpr_at_1pct_fpr": s.tpr_at[0.01],
+                "risk": report.risk,
+            }
+        )
+    return rows
