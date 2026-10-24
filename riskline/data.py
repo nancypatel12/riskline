@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from riskline.schema import FEATURES, RANGES, TARGET
+from riskline.schema import COLUMNS, RANGES, TARGET
 
 
 class DataValidationError(ValueError):
@@ -32,18 +32,18 @@ def load(path: str | Path) -> pd.DataFrame:
     with zipfile.ZipFile(path) as z, z.open(z.namelist()[0]) as f:
         df = pd.read_excel(f, header=1)
     df = df.rename(columns=str.lower).rename(columns={"pay_0": "pay_1", "default payment next month": TARGET})
-    return df.drop(columns="id")[[*FEATURES, TARGET]]
+    return df.drop(columns="id")[[*COLUMNS, TARGET]]
 
 
 def validate(df: pd.DataFrame, min_rows: int = 100) -> pd.DataFrame:
     """Fail loudly, listing every violation at once."""
     errors = []
-    missing = set([*FEATURES, TARGET]) - set(df.columns)
+    missing = set([*COLUMNS, TARGET]) - set(df.columns)
     if missing:
         raise DataValidationError(f"missing columns: {sorted(missing)}")
     if len(df) < min_rows:
         errors.append(f"only {len(df)} rows (< {min_rows})")
-    for col in [*FEATURES, TARGET]:
+    for col in [*COLUMNS, TARGET]:
         if not pd.api.types.is_numeric_dtype(df[col]):
             errors.append(f"{col}: non-numeric dtype {df[col].dtype}")
         elif df[col].isna().any():

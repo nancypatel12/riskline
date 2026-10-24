@@ -17,7 +17,6 @@ class FeatureBuilder(TransformerMixin, BaseEstimator):
         X = X[FEATURES].copy()
         # Codes 0, 5, 6 are undocumented in the source; fold them into "other".
         X["education"] = X["education"].where(X["education"].between(1, 4), 4)
-        X["marriage"] = X["marriage"].where(X["marriage"].between(1, 3), 3)
 
         bills = X[[f"bill_amt{m}" for m in MONTHS]].to_numpy(float)
         paid = X[[f"pay_amt{m}" for m in MONTHS]].to_numpy(float)

@@ -38,7 +38,7 @@ def test_split_is_stratified_and_disjoint(df, cfg):
 def test_features_fold_unknown_codes(df):
     X = FeatureBuilder().fit_transform(df[FEATURES])
     assert set(X.education) <= {1, 2, 3, 4}
-    assert set(X.marriage) <= {1, 2, 3}
+    assert not set(X.columns) & {"sex", "age", "marriage"}
     assert np.isfinite(X.select_dtypes("number").to_numpy()).all()
 
 

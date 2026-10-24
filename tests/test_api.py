@@ -41,15 +41,20 @@ def test_batch_matches_single(client, applicant):
 
 @pytest.mark.parametrize(
     "patch",
-    [{"age": 12}, {"sex": 3}, {"pay_1": 10}, {"limit_bal": -1}, {"pay_amt1": -5}, {"unknown": 1}, {"age": "old"}],
+    [{"education": 9}, {"pay_1": 10}, {"limit_bal": -1}, {"pay_amt1": -5}, {"unknown": 1}, {"pay_1": "late"}],
 )
 def test_rejects_invalid_input(client, applicant, patch):
     assert client.post("/predict", json=applicant | patch).status_code == 422
 
 
 def test_rejects_missing_field(client, applicant):
-    applicant.pop("age")
+    applicant.pop("limit_bal")
     assert client.post("/predict", json=applicant).status_code == 422
+
+
+@pytest.mark.parametrize("field", [{"sex": 2}, {"age": 35}, {"marriage": 1}])
+def test_rejects_protected_attributes(client, applicant, field):
+    assert client.post("/predict", json=applicant | field).status_code == 422
 
 
 @pytest.mark.parametrize("n", [0, MAX_BATCH + 1])

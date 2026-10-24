@@ -14,10 +14,7 @@ N_SINGLE, N_BATCH, BATCH, WARMUP = 2000, 200, 100, 100
 
 SAMPLE = {
     "limit_bal": 50000,
-    "sex": 2,
     "education": 2,
-    "marriage": 1,
-    "age": 35,
     **{f"pay_{m}": 0 for m in range(1, 7)},
     **{f"bill_amt{m}": 20000 for m in range(1, 7)},
     **{f"pay_amt{m}": 2000 for m in range(1, 7)},
