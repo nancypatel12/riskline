@@ -1,4 +1,4 @@
-"""Outcomes by sex, age and marital status for the production model, on the test split."""
+"""Outcomes by sex, age and marital status on the test split, and what leaving them out of the model costs."""
 
 import json
 from pathlib import Path
@@ -8,8 +8,8 @@ import yaml
 from riskline import data
 from riskline.fairness import by_group, groups
 from riskline.registry import Registry
-from riskline.schema import FEATURES, TARGET
-from riskline.train import split
+from riskline.schema import COLUMNS, FEATURES, TARGET
+from riskline.train import fit, split
 
 
 def main() -> None:
@@ -32,6 +32,14 @@ def main() -> None:
                 f"defaults caught {r['defaults_caught']:.3f}"
             )
         print("  gaps " + "  ".join(f"{k} {v:.3f}" for k, v in report["gaps"].items()))
+
+    # The same recipe, trained with sex, age and marital status as inputs.
+    _, with_protected, _ = fit(df, cfg, columns=COLUMNS)
+    results["test_roc_auc"] = {
+        "without_protected": card["metrics"]["roc_auc"],
+        "with_protected": with_protected["metrics"]["roc_auc"],
+    }
+    print("test ROC-AUC  " + "  ".join(f"{k} {v:.4f}" for k, v in results["test_roc_auc"].items()))
 
     Path("reports").mkdir(exist_ok=True)
     Path("reports/fairness.json").write_text(json.dumps(results, indent=2) + "\n")
