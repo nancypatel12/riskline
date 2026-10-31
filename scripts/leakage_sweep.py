@@ -1,6 +1,7 @@
 """Does training longer make the model leak more? Audit one model per training length, for two tree sizes.
 
-Writes reports/leakage.json. Pass --plot to redraw reports/leakage.png from it without retraining.
+Writes reports/leakage.json. Pass --plot to redraw reports/leakage.png from it without retraining, or
+--extra-seeds 43 44 to repeat the sweep on other seeds (a new split each) and add them to the report.
 """
 
 import argparse
@@ -46,6 +47,23 @@ def run() -> dict:
                 f"attack AUC {r['attack_auc']:.3f} ({r['strongest_attack']})  TPR@1%FPR {r['tpr_at_1pct_fpr']:.3f}"
             )
     return results
+
+
+def repeat(seeds) -> dict:
+    """The same sweep on other seeds, each with its own split, to show how much one seed's numbers move."""
+    cfg = yaml.safe_load(Path("config.yaml").read_text())
+    src = cfg["data"]
+    df = data.validate(data.load(data.fetch(src["url"], src["sha256"], src["cache"])))
+    params = {k: v for k, v in cfg["model"].items() if k != "calibration"}
+    extra = {}
+    for seed in seeds:
+        train, _, test = split(df, src["splits"], seed)
+        extra[str(seed)] = {}
+        for name, change in TREES.items():
+            rows = sweep({**params, **change}, ROUNDS, train, test, TARGET, seed)
+            extra[str(seed)][name] = rows
+            print(f"seed {seed} {name:<11}" + "  ".join(f"{r['rounds']}: {r['attack_auc']:.3f}" for r in rows))
+    return extra
 
 
 def plot(results: dict) -> None:
@@ -119,8 +137,14 @@ def plot(results: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plot", action="store_true", help="redraw the chart from the saved report")
+    parser.add_argument("--extra-seeds", type=int, nargs="+", help="repeat the sweep on these seeds and add them")
     args = parser.parse_args()
 
+    if args.extra_seeds:
+        results = json.loads(REPORT.read_text())
+        results["extra_seeds"] = repeat(args.extra_seeds)
+        REPORT.write_text(json.dumps(results, indent=2) + "\n")
+        return
     if args.plot:
         results = json.loads(REPORT.read_text())
     else:

@@ -23,7 +23,7 @@ Or `make docker`. The image trains on the real data at build time and serves as 
 
 ## Results
 
-Every number here is reproduced by `make train drift bench privacy fairness sweep`.
+Every number here is reproduced by `make train drift bench privacy fairness calibration sweep sweep-seeds`.
 
 [UCI Default of Credit Card Clients](https://archive.ics.uci.edu/dataset/350): 30,000 Taiwanese cardholders, 22.1% default next month. The model uses 20 of the 23 columns: sex, age and marital status are left out. Stratified 60/20/20 split; the decision threshold is chosen on the calibration split, never on test.
 
@@ -73,7 +73,7 @@ Left: how well each model ranks new customers. Right: how well the strongest att
 
 Test ROC-AUC holds within 0.005 up to 200 rounds, then slips. The attack keeps getting stronger, for both tree sizes. Past early stopping, extra training buys nothing for new customers and only teaches the model its training set. Early stopping halts production at 69 rounds, before most of that climb.
 
-Two caveats. This is one seed and one split, so differences under about 0.01 are noise. And the models here are uncalibrated, while production ships calibrated; the production audit above (0.562) sits next to the 100-round point (0.557).
+The climb repeats on seeds 43 and 44, each with its own split (`reports/leakage.json`, `extra_seeds`): production trees go from 0.51–0.53 at 25 rounds to 0.63–0.64 at 800, and deep trees from 0.57–0.58 to 0.83. One caveat: the models here are uncalibrated, while production ships calibrated; the production audit above (0.562) sits next to the 100-round point (0.557).
 
 At 1% FPR the deep trees stay at or below 2% TPR up to 400 rounds, then reach 4.6% at 800: the leak spreads across many customers before it singles out a few.
 
@@ -116,7 +116,7 @@ Each model card records the Python and scikit-learn versions, config hash, data 
 
 ## Decisions
 
-- **Calibration method.** Sigmoid, not isotonic: isotonic creates ties that cost 1.5 points of PR-AUC here. Boosted trees on log-loss were already well calibrated (ECE 1.7%); the step stays as a guard and is cheap.
+- **Calibration method.** Sigmoid, not isotonic: isotonic creates ties that cost 1.5 points of PR-AUC here (1.5 to 2.3 across three seeds, `reports/calibration.json`). Boosted trees on log-loss were already well calibrated (ECE 1.7%); the step stays as a guard and is cheap.
 - **scikit-learn over LightGBM.** Same histogram-boosting algorithm, no OpenMP system dependency. A smaller image and a simpler CI.
 - **Alert rule.** PSI ≥ 0.2 or KS ≥ 0.1. With thousands of rows every KS p-value is tiny; the statistic is what matters.
 - **Sweep axis.** Boosting rounds, with early stopping off, because rounds are the knob early stopping already turns. Tree size is a second line, not a grid: one axis, one answer.
@@ -130,14 +130,14 @@ Each model card records the Python and scikit-learn versions, config hash, data 
 - **A simulated downturn.** The drift check is tested on a downturn I generated, not one that happened.
 - **My cost ratio.** I set a missed default to cost five times a wrongly declined customer. A lender would set its own.
 - **Failed attacks are not a guarantee.** A low attack score means these attacks failed, not that the model is private. There is no differential privacy.
-- **One seed for the sweep,** on one split. Latency is measured on one machine.
+- **Three seeds for the sweep,** each on its own split. Latency is measured on one machine.
 
 ## Rules
 
 - **Thresholds come from calibration data.** Nothing is tuned on the test split.
 - **One schema.** Feature names and ranges live only in `riskline/schema.py`; data validation and the API both read from it.
 - **Every behavior change ships with a test.** Tests use synthetic data and never touch the network.
-- **Numbers are regenerated, never typed.** A change that moves a metric reruns `make train drift bench privacy fairness sweep` and commits the updated `reports/`.
+- **Numbers are regenerated, never typed.** A change that moves a metric reruns `make train drift bench privacy fairness calibration sweep sweep-seeds` and commits the updated `reports/`.
 - **Dependencies are pinned.** `requirements.lock` changes deliberately, in its own commit.
 
 ## Tests

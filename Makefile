@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install train serve test lint drift bench privacy sweep fairness docker clean
+.PHONY: install train serve test lint drift bench privacy sweep sweep-seeds fairness calibration docker clean
 
 install:
 	python3 -m venv .venv
@@ -32,8 +32,15 @@ privacy:
 sweep:
 	$(PY) scripts/leakage_sweep.py
 
+# The same sweep on two more seeds, added to reports/leakage.json. Run after sweep; about 18 minutes.
+sweep-seeds:
+	$(PY) scripts/leakage_sweep.py --extra-seeds 43 44
+
 fairness:
 	$(PY) scripts/fairness_audit.py
+
+calibration:
+	$(PY) scripts/calibration_compare.py
 
 docker:
 	docker build -t riskline .

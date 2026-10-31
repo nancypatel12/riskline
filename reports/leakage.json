@@ -133,5 +133,259 @@
         "risk": "severe"
       }
     ]
+  },
+  "extra_seeds": {
+    "43": {
+      "production": [
+        {
+          "rounds": 25,
+          "test_roc_auc": 0.7743468023507551,
+          "train_accuracy": 0.816,
+          "test_accuracy": 0.8205,
+          "strongest_attack": "lira",
+          "attack_auc": 0.52678875,
+          "tpr_at_1pct_fpr": 0.013,
+          "risk": "low"
+        },
+        {
+          "rounds": 50,
+          "test_roc_auc": 0.7770171475217749,
+          "train_accuracy": 0.822,
+          "test_accuracy": 0.82,
+          "strongest_attack": "lira",
+          "attack_auc": 0.52952675,
+          "tpr_at_1pct_fpr": 0.0125,
+          "risk": "low"
+        },
+        {
+          "rounds": 100,
+          "test_roc_auc": 0.7784817332360814,
+          "train_accuracy": 0.8305,
+          "test_accuracy": 0.8205,
+          "strongest_attack": "lira",
+          "attack_auc": 0.54367675,
+          "tpr_at_1pct_fpr": 0.024,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 200,
+          "test_roc_auc": 0.7759137090996056,
+          "train_accuracy": 0.841,
+          "test_accuracy": 0.818,
+          "strongest_attack": "lira",
+          "attack_auc": 0.56371875,
+          "tpr_at_1pct_fpr": 0.028,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 400,
+          "test_roc_auc": 0.7702209827947462,
+          "train_accuracy": 0.868,
+          "test_accuracy": 0.8155,
+          "strongest_attack": "lira",
+          "attack_auc": 0.5977122500000001,
+          "tpr_at_1pct_fpr": 0.038,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 800,
+          "test_roc_auc": 0.7625264248708006,
+          "train_accuracy": 0.915,
+          "test_accuracy": 0.813,
+          "strongest_attack": "lira",
+          "attack_auc": 0.634544,
+          "tpr_at_1pct_fpr": 0.048,
+          "risk": "moderate"
+        }
+      ],
+      "deep": [
+        {
+          "rounds": 25,
+          "test_roc_auc": 0.7640779310541679,
+          "train_accuracy": 0.865,
+          "test_accuracy": 0.8205,
+          "strongest_attack": "lira",
+          "attack_auc": 0.57367325,
+          "tpr_at_1pct_fpr": 0.011,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 50,
+          "test_roc_auc": 0.7665790312673407,
+          "train_accuracy": 0.895,
+          "test_accuracy": 0.821,
+          "strongest_attack": "lira",
+          "attack_auc": 0.5983775,
+          "tpr_at_1pct_fpr": 0.017,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 100,
+          "test_roc_auc": 0.7629597371163788,
+          "train_accuracy": 0.961,
+          "test_accuracy": 0.8155,
+          "strongest_attack": "lira",
+          "attack_auc": 0.64424375,
+          "tpr_at_1pct_fpr": 0.0145,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 200,
+          "test_roc_auc": 0.7592620694070428,
+          "train_accuracy": 0.9865,
+          "test_accuracy": 0.819,
+          "strongest_attack": "loss",
+          "attack_auc": 0.648607625,
+          "tpr_at_1pct_fpr": 0.0185,
+          "risk": "high"
+        },
+        {
+          "rounds": 400,
+          "test_roc_auc": 0.755568030103187,
+          "train_accuracy": 0.9925,
+          "test_accuracy": 0.812,
+          "strongest_attack": "lira",
+          "attack_auc": 0.7897897500000001,
+          "tpr_at_1pct_fpr": 0.021,
+          "risk": "high"
+        },
+        {
+          "rounds": 800,
+          "test_roc_auc": 0.7497756435944694,
+          "train_accuracy": 0.9945,
+          "test_accuracy": 0.8135,
+          "strongest_attack": "lira",
+          "attack_auc": 0.83298875,
+          "tpr_at_1pct_fpr": 0.0405,
+          "risk": "severe"
+        }
+      ]
+    },
+    "44": {
+      "production": [
+        {
+          "rounds": 25,
+          "test_roc_auc": 0.7779307800217091,
+          "train_accuracy": 0.828,
+          "test_accuracy": 0.8345,
+          "strongest_attack": "lira",
+          "attack_auc": 0.50568075,
+          "tpr_at_1pct_fpr": 0.0195,
+          "risk": "low"
+        },
+        {
+          "rounds": 50,
+          "test_roc_auc": 0.7792095913754253,
+          "train_accuracy": 0.8325,
+          "test_accuracy": 0.8285,
+          "strongest_attack": "lira",
+          "attack_auc": 0.5320367500000001,
+          "tpr_at_1pct_fpr": 0.0235,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 100,
+          "test_roc_auc": 0.7796365337536048,
+          "train_accuracy": 0.8405,
+          "test_accuracy": 0.8305,
+          "strongest_attack": "lira",
+          "attack_auc": 0.5488014999999999,
+          "tpr_at_1pct_fpr": 0.021,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 200,
+          "test_roc_auc": 0.7772550096588153,
+          "train_accuracy": 0.847,
+          "test_accuracy": 0.8345,
+          "strongest_attack": "lira",
+          "attack_auc": 0.5682467499999999,
+          "tpr_at_1pct_fpr": 0.0285,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 400,
+          "test_roc_auc": 0.7704815829394631,
+          "train_accuracy": 0.868,
+          "test_accuracy": 0.8315,
+          "strongest_attack": "lira",
+          "attack_auc": 0.595803,
+          "tpr_at_1pct_fpr": 0.039,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 800,
+          "test_roc_auc": 0.7648108689611842,
+          "train_accuracy": 0.907,
+          "test_accuracy": 0.826,
+          "strongest_attack": "lira",
+          "attack_auc": 0.63041325,
+          "tpr_at_1pct_fpr": 0.042,
+          "risk": "moderate"
+        }
+      ],
+      "deep": [
+        {
+          "rounds": 25,
+          "test_roc_auc": 0.7639847213489411,
+          "train_accuracy": 0.8655,
+          "test_accuracy": 0.8325,
+          "strongest_attack": "lira",
+          "attack_auc": 0.56781575,
+          "tpr_at_1pct_fpr": 0.0115,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 50,
+          "test_roc_auc": 0.7653427932045933,
+          "train_accuracy": 0.897,
+          "test_accuracy": 0.83,
+          "strongest_attack": "lira",
+          "attack_auc": 0.59412275,
+          "tpr_at_1pct_fpr": 0.0075,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 100,
+          "test_roc_auc": 0.7667929459282115,
+          "train_accuracy": 0.961,
+          "test_accuracy": 0.8265,
+          "strongest_attack": "lira",
+          "attack_auc": 0.6353675,
+          "tpr_at_1pct_fpr": 0.0095,
+          "risk": "moderate"
+        },
+        {
+          "rounds": 200,
+          "test_roc_auc": 0.7645377709753687,
+          "train_accuracy": 0.9905,
+          "test_accuracy": 0.825,
+          "strongest_attack": "lira",
+          "attack_auc": 0.7338974999999999,
+          "tpr_at_1pct_fpr": 0.011,
+          "risk": "high"
+        },
+        {
+          "rounds": 400,
+          "test_roc_auc": 0.7593149634958221,
+          "train_accuracy": 0.9935,
+          "test_accuracy": 0.827,
+          "strongest_attack": "lira",
+          "attack_auc": 0.8009835000000001,
+          "tpr_at_1pct_fpr": 0.025,
+          "risk": "severe"
+        },
+        {
+          "rounds": 800,
+          "test_roc_auc": 0.7550270751616939,
+          "train_accuracy": 0.9945,
+          "test_accuracy": 0.8245,
+          "strongest_attack": "lira",
+          "attack_auc": 0.8318642500000001,
+          "tpr_at_1pct_fpr": 0.0415,
+          "risk": "severe"
+        }
+      ]
+    }
   }
 }
