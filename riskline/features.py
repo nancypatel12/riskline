@@ -10,11 +10,18 @@ from riskline.schema import DELAYS, FEATURES, MONTHS
 class FeatureBuilder(TransformerMixin, BaseEstimator):
     """Cleans undocumented category codes and adds credit-behavior ratios."""
 
+    # Models saved before this parameter existed load without it and use FEATURES.
+    columns = None
+
+    def __init__(self, columns=None):
+        # Only the fairness audit passes other columns, to measure what leaving sex, age and marital status out costs.
+        self.columns = columns
+
     def fit(self, X, y=None):
         return self
 
     def transform(self, X: pd.DataFrame) -> pd.DataFrame:
-        X = X[FEATURES].copy()
+        X = X[list(self.columns or FEATURES)].copy()
         # Codes 0, 5, 6 are undocumented in the source; fold them into "other".
         X["education"] = X["education"].where(X["education"].between(1, 4), 4)
 
@@ -32,4 +39,4 @@ class FeatureBuilder(TransformerMixin, BaseEstimator):
 
     def get_feature_names_out(self, input_features=None):
         extra = ["utilization", "avg_utilization", "repay_ratio", "max_delay", "months_late"]
-        return np.array(FEATURES + extra)
+        return np.array(list(self.columns or FEATURES) + extra)

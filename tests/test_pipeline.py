@@ -4,7 +4,7 @@ import pytest
 from riskline import data
 from riskline.features import FeatureBuilder
 from riskline.metrics import best_threshold, ece, expected_cost
-from riskline.schema import FEATURES, TARGET
+from riskline.schema import COLUMNS, FEATURES, TARGET
 from riskline.train import fit, split
 
 
@@ -40,6 +40,12 @@ def test_features_fold_unknown_codes(df):
     assert set(X.education) <= {1, 2, 3, 4}
     assert not set(X.columns) & {"sex", "age", "marriage"}
     assert np.isfinite(X.select_dtypes("number").to_numpy()).all()
+
+
+def test_fit_can_include_protected_columns_for_the_audit(df, cfg):
+    _, card, _ = fit(df, cfg, columns=COLUMNS)
+    assert {"sex", "age", "marriage"} <= set(card["features"])
+    assert card["metrics"]["roc_auc"] > 0.5
 
 
 def test_training_learns_and_is_deterministic(trained, df, cfg):

@@ -102,5 +102,9 @@
         "defaults_caught": 0.004491017964071808
       }
     }
+  },
+  "test_roc_auc": {
+    "without_protected": 0.7783082954541239,
+    "with_protected": 0.7761486685122618
   }
 }

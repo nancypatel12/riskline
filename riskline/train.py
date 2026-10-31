@@ -31,28 +31,29 @@ def split(df: pd.DataFrame, fractions: dict, seed: int):
     return train, calib, test
 
 
-def build(params: dict, seed: int) -> Pipeline:
+def build(params: dict, seed: int, columns: list[str] | None = None) -> Pipeline:
     params = {k: v for k, v in params.items() if k != "calibration"}
     return Pipeline(
         [
-            ("features", FeatureBuilder()),
+            ("features", FeatureBuilder(columns)),
             ("model", HistGradientBoostingClassifier(categorical_features=CATEGORICAL, random_state=seed, **params)),
         ]
     )
 
 
-def fit(df: pd.DataFrame, cfg: dict):
-    """Train, calibrate and evaluate. Returns (model, card, reference)."""
+def fit(df: pd.DataFrame, cfg: dict, columns: list[str] | None = None):
+    """Train, calibrate and evaluate on `columns` (default FEATURES). Returns (model, card, reference)."""
+    features = list(columns or FEATURES)
     seed, cost = cfg["seed"], cfg["cost"]
     c_fn, c_fp = cost["false_negative"], cost["false_positive"]
     train, calib, test = split(df, cfg["data"]["splits"], seed)
-    Xtr, ytr = train[FEATURES], train[TARGET]
-    Xca, yca = calib[FEATURES], calib[TARGET]
-    Xte, yte = test[FEATURES], test[TARGET]
+    Xtr, ytr = train[features], train[TARGET]
+    Xca, yca = calib[features], calib[TARGET]
+    Xte, yte = test[features], test[TARGET]
 
-    gbm = build(cfg["model"], seed).fit(Xtr, ytr)
+    gbm = build(cfg["model"], seed, columns).fit(Xtr, ytr)
     model = CalibratedClassifierCV(FrozenEstimator(gbm), method=cfg["model"]["calibration"]).fit(Xca, yca)
-    baseline = make_pipeline(FeatureBuilder(), StandardScaler(), LogisticRegression(max_iter=2000)).fit(Xtr, ytr)
+    baseline = make_pipeline(FeatureBuilder(columns), StandardScaler(), LogisticRegression(max_iter=2000)).fit(Xtr, ytr)
 
     def score(m):
         # Thresholds are chosen on calibration data, never on test.
@@ -64,7 +65,7 @@ def fit(df: pd.DataFrame, cfg: dict):
     card = {
         "threshold": threshold,
         "cost": cost,
-        "features": FEATURES,
+        "features": features,
         "rows": {"train": len(train), "calib": len(calib), "test": len(test)},
         "default_rate": float(df[TARGET].mean()),
         "metrics": metrics,

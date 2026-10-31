@@ -79,7 +79,7 @@ At 1% FPR the deep trees stay at or below 2% TPR up to 400 rounds, then reach 4.
 
 ### Does it treat groups alike?
 
-The model never sees sex, age or marital status, and the API rejects them. They stay in the data only to audit outcomes. Dropping them cost nothing measurable: test ROC-AUC is 0.778 with or without them.
+The model never sees sex, age or marital status, and the API rejects them. They stay in the data only to audit outcomes. Dropping them cost nothing: the same recipe trained with them scores 0.776 test ROC-AUC, against 0.778 without (`reports/fairness.json`, one seed).
 
 | Test set, n = 6,000 | n | Default rate | Mean score | Good customers flagged | Defaults caught |
 |---|---:|---:|---:|---:|---:|
@@ -142,7 +142,7 @@ Each model card records the Python and scikit-learn versions, config hash, data 
 
 ## Tests
 
-37 tests, ~13 s, no network: data validation rejects each failure mode, training is deterministic and beats chance, the threshold search recovers the Bayes rule, registry round-trips and gates, the API rejects bad input and protected attributes, PSI separates shifted from unshifted data, the privacy audit separates an overfit model from a regularized one, the sweep finds more leakage after more rounds, and group rates and gaps are computed correctly. CI runs lint and tests on Python 3.12 and 3.13, then builds the Docker image, which trains on the real dataset, and smoke-tests it.
+38 tests, ~13 s, no network: data validation rejects each failure mode, training is deterministic and beats chance, training can include protected attributes for the audit, the threshold search recovers the Bayes rule, registry round-trips and gates, the API rejects bad input and protected attributes, PSI separates shifted from unshifted data, the privacy audit separates an overfit model from a regularized one, the sweep finds more leakage after more rounds, and group rates and gaps are computed correctly. CI runs lint and tests on Python 3.12 and 3.13, then builds the Docker image, which trains on the real dataset, and smoke-tests it.
 
 ## License
 
