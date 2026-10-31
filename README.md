@@ -90,7 +90,7 @@ The model never sees sex, age or marital status, and the API rejects them. They 
 | Age 40-49 | 1,341 | 23.3% | 21.9% | 35.6% | 73.4% |
 | Age 50+ | 549 | 24.6% | 23.5% | 39.6% | 75.6% |
 
-By sex, the gaps are small: 1.7 points in good customers wrongly flagged. Age is the real gap. Good customers under 30 are flagged 41.4% of the time, against 34.7% at 30-39, even though the model never sees age. It overestimates their risk: a mean score of 23.9% against an actual default rate of 22.3%. Other features carry age in. I report this rather than correct it: equalizing error rates across groups is a policy choice with its own costs. Marital status is in `reports/fairness.json`; its "other" group has only 75 people, so its numbers are noise.
+By sex, there's no clear gap: 1.7 points in good customers wrongly flagged, with a 95% bootstrap interval of −1.1 to 4.4. Age is the real gap. Good customers under 30 are flagged 41.4% of the time, against 34.7% at 30-39: 6.7 points, with a 95% interval of 3.4 to 10.1, even though the model never sees age. It overestimates their risk: a mean score of 23.9% against an actual default rate of 22.3%. Other features carry age in. I report this rather than correct it: equalizing error rates across groups is a policy choice with its own costs. Marital status is in `reports/fairness.json`; its "other" group has only 75 people, so its numbers are noise.
 
 Raw numbers: [`reports/`](reports).
 
@@ -142,7 +142,7 @@ Each model card records the Python and scikit-learn versions, config hash, data 
 
 ## Tests
 
-38 tests, ~13 s, no network: data validation rejects each failure mode, training is deterministic and beats chance, training can include protected attributes for the audit, the threshold search recovers the Bayes rule, registry round-trips and gates, the API rejects bad input and protected attributes, PSI separates shifted from unshifted data, the privacy audit separates an overfit model from a regularized one, the sweep finds more leakage after more rounds, and group rates and gaps are computed correctly. CI runs lint and tests on Python 3.12 and 3.13, then builds the Docker image, which trains on the real dataset, and smoke-tests it.
+39 tests, ~13 s, no network: data validation rejects each failure mode, training is deterministic and beats chance, training can include protected attributes for the audit, the threshold search recovers the Bayes rule, registry round-trips and gates, the API rejects bad input and protected attributes, PSI separates shifted from unshifted data, the privacy audit separates an overfit model from a regularized one, the sweep finds more leakage after more rounds, and group rates, gaps and their bootstrap intervals are computed correctly. CI runs lint and tests on Python 3.12 and 3.13, then builds the Docker image, which trains on the real dataset, and smoke-tests it.
 
 ## License
 

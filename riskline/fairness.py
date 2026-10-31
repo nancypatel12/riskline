@@ -35,3 +35,20 @@ def by_group(y, p, threshold: float, labels: pd.Series) -> dict:
     keys = ("flag_rate", "wrongly_flagged", "defaults_caught")
     gaps = {k: max(r[k] for r in rows.values()) - min(r[k] for r in rows.values()) for k in keys}
     return {"groups": rows, "gaps": gaps}
+
+
+def gap_interval(y, p, threshold: float, labels, high: str, low: str, n: int = 1000, seed: int = 0) -> list[float]:
+    """95% bootstrap interval for how much more often good customers in `high` are wrongly flagged than in `low`.
+
+    Resamples test rows with replacement, so a gap that comes from a few customers shows up as a wide interval.
+    """
+    y, p, labels = np.asarray(y), np.asarray(p), np.asarray(labels)
+    flag = p >= threshold
+    rng = np.random.default_rng(seed)
+    gaps = []
+    for _ in range(n):
+        i = rng.integers(0, len(y), len(y))
+        ys, fs, ls = y[i], flag[i], labels[i]
+        rate = {g: fs[(ls == g) & (ys == 0)].mean() for g in (high, low)}
+        gaps.append(rate[high] - rate[low])
+    return [float(np.percentile(gaps, 2.5)), float(np.percentile(gaps, 97.5))]
